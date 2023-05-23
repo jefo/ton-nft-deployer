@@ -1,6 +1,7 @@
 import TonWeb from 'tonweb' // should be on top
 
-import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
+// import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
+import { NftCollectionEditable } from './NftCollectionEditable'
 
 const { NftItem } = TonWeb.token.nft
 
@@ -36,7 +37,7 @@ type ParseError = {
 
 export async function isNftExists(
   tonweb: TonWeb,
-  collection: NftCollectionType,
+  collection: NftCollectionEditable,
   index: number
 ): Promise<boolean> {
   const nftItemAddress = await callTonApi<ReturnType<typeof collection.getNftItemAddressByIndex>>(

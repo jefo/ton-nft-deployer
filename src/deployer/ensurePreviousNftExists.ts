@@ -1,13 +1,14 @@
 import TonWeb from 'tonweb' // should be on top
-import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
+// import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
 import Deployer from '.'
 import { callTonApi } from '../utils'
+import { NftCollectionEditable } from '../NftCollectionEditable'
 
 const { NftItem } = TonWeb.token.nft
 
 export async function ensurePreviousNftExists(
   this: Deployer,
-  nftCollection: NftCollectionType,
+  nftCollection: NftCollectionEditable,
   nftId: number
 ) {
   if (nftId < 0) {

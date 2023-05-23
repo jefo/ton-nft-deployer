@@ -7,3 +7,4 @@ files
 nfts.csv
 output/web
 dist
+src/nfts.json

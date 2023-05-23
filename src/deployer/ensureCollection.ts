@@ -1,14 +1,14 @@
 import TonWeb from 'tonweb' // should be on top
-import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
 
 import { callTonApi } from '../utils'
 import Deployer from './index'
+import { NftCollectionEditable } from '../NftCollectionEditable'
 
-const { NftItem, NftCollection } = TonWeb.token.nft
+const { NftItem } = TonWeb.token.nft
 
 // ensureCollection - get collection. if we have one in db - return it
 // if not - deploy new one
-export async function ensureCollection(this: Deployer): Promise<NftCollectionType> {
+export async function ensureCollection(this: Deployer): Promise<NftCollectionEditable> {
   // const collection = await tx<Collection>('collections').first()
   const walletAddress = await this.wallet.getAddress()
 
@@ -25,7 +25,7 @@ export async function ensureCollection(this: Deployer): Promise<NftCollectionTyp
     nftItemCodeHex: NftItem.codeHex,
   }
 
-  const nftCollection = new NftCollection(this.tonweb.provider, createCollectionParams)
+  const nftCollection = new NftCollectionEditable(this.tonweb.provider, createCollectionParams)
 
   try {
     const collectionData = await callTonApi<ReturnType<typeof nftCollection.getCollectionData>>(
@@ -36,7 +36,7 @@ export async function ensureCollection(this: Deployer): Promise<NftCollectionTyp
     if (collectionData.collectionContentUri !== '') {
       return nftCollection
     }
-  } catch (e) {}
+  } catch (e) { }
 
   // Address that deploys everything should have tons
   await this.ensureDeployerBalance()

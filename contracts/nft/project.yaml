@@ -1,0 +1,11 @@
+nft:
+  data: fift/wallet_data.fif
+  func:
+    - ../ft/op-codes.fc
+    - ../ft/params.fc
+    - ../ft/jetton-utils.fc
+    - tests/utils/helpers.func
+    - ../ft/jetton-wallet.fc
+  tests:
+    - tests/wallet-tests.func
+    - tests/wallet-tests-int.func

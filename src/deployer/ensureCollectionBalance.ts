@@ -1,12 +1,13 @@
 import TonWeb from 'tonweb' // should be on top
-import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
+// import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
 import BN from 'bn.js'
 
 import { callTonApi } from '../utils'
 import Deployer from './index'
+import { NftCollectionEditable } from '../NftCollectionEditable'
 
 // ensureCollectionBalance - ensures that collection address has enough tons to deploy nft
-export async function ensureCollectionBalance(this: Deployer, nftCollection: NftCollectionType) {
+export async function ensureCollectionBalance(this: Deployer, nftCollection: NftCollectionEditable) {
   const nftCollectionAddress = await nftCollection.getAddress()
   const sBalance = await this.tonweb.getBalance(nftCollectionAddress)
 

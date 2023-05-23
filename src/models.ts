@@ -19,7 +19,8 @@ export interface Config {
 }
 
 export class Nft {
-  public id: number
+  public id: string
+  public idx: number
 
   public collection_address?: string
   public owner_address?: string

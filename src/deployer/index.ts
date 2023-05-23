@@ -8,7 +8,8 @@ import { ensureCollection } from './ensureCollection'
 import { ensureDeployerBalance } from './ensureDeployerBalance'
 import { ensurePreviousNftExists } from './ensurePreviousNftExists'
 import { WalletContract } from 'tonweb/dist/types/contract/wallet/wallet-contract'
-import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
+import { NftCollectionEditable } from '../NftCollectionEditable'
+// import { NftCollection as NftCollectionType } from 'tonweb/dist/types/contract/token/nft/nft-collection'
 
 class Deployer {
   protected workInProgress = false
@@ -16,7 +17,7 @@ class Deployer {
   protected nfts: Nft[]
 
   protected deployIndex: number
-  protected collection: NftCollectionType
+  protected collection: NftCollectionEditable
 
   protected tonweb: TonWeb
 
@@ -39,6 +40,7 @@ class Deployer {
       ? `${config.tonApiUrl}?api_key=${config.tonApiKey}`
       : config.tonApiUrl
     this.tonweb = new TonWeb(new TonWeb.HttpProvider(tonApiEndpoint))
+  
 
     this.log = log || console.log
   }
@@ -64,6 +66,8 @@ class Deployer {
       publicKey: this.key.publicKey,
       wc: 0,
     })
+
+  
 
     const walletAddress = await this.wallet.getAddress()
     const stringAddress = walletAddress.toString(true, true, true)
